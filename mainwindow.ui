@@ -34,7 +34,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QProgressBar" name="progressBar">
+      <widget class="QProgressBar" name="shortBreakBar">
        <property name="value">
         <number>24</number>
        </property>
@@ -47,7 +47,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QProgressBar" name="progressBar_2">
+      <widget class="QProgressBar" name="longBreakBar">
        <property name="value">
         <number>44</number>
        </property>

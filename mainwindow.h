@@ -16,6 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
 
 private slots:
@@ -26,9 +27,10 @@ private:
 
     QTimer* breakTimer;
     int currentSeconds;
-    int maxSeconds;
+    int shortBreakDuration;
+    int longBreakDuration;
     bool isRunning;
 
-    void updateTimeDisplay();
+    void initBreakBars() const;
 };
 #endif // MAINWINDOW_H

@@ -32,6 +32,9 @@ void MainWindow::initBreakBars() const {
 
     ui->shortBreakBar->setValue(0);
     ui->longBreakBar->setValue(0);
+
+    ui->shortBreakBar->setFormat(formatTimeDisplay(currentSeconds));
+    ui->longBreakBar->setFormat(formatTimeDisplay(currentSeconds));
 }
 
 void MainWindow::updateProgress() {

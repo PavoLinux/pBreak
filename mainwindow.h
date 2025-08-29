@@ -26,6 +26,8 @@ private:
     Ui::MainWindow *ui;
 
     QTimer* breakTimer;
+    QTimer* inactivityTimer;
+    QPoint lastMousePos;
     int currentShortSeconds;
     int currentLongSeconds;
     int shortBreakDuration;
@@ -33,5 +35,6 @@ private:
     bool isRunning;
 
     void initBreakBars() const;
+    void checkMouseActivity();
 };
 #endif // MAINWINDOW_H

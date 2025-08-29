@@ -1,5 +1,11 @@
 #include "mainwindow.h"
+
+#include <QTimer>
+
 #include "./ui_mainwindow.h"
+
+constexpr int INACTIVITY_TIMER_DURATION = 2000;
+constexpr int BREAK_TIMER_DURATION = 1000;
 
 static QString formatTimeDisplay(const int totalSeconds) {
     const int minutes = totalSeconds / 60;
@@ -9,6 +15,7 @@ static QString formatTimeDisplay(const int totalSeconds) {
             .arg(minutes, 2, 10, QChar('0'))
             .arg(seconds, 2, 10, QChar('0'));
 }
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -23,8 +30,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     initBreakBars();
     connect(breakTimer, &QTimer::timeout, this, &MainWindow::updateProgress);
+    breakTimer->start(BREAK_TIMER_DURATION);
 
-    breakTimer->start(1000);
+    inactivityTimer = new QTimer(this);
+    connect(inactivityTimer, &QTimer::timeout, this, &MainWindow::checkMouseActivity);
+    inactivityTimer->start(INACTIVITY_TIMER_DURATION);
+
+    lastMousePos = QCursor::pos();
 }
 
 void MainWindow::initBreakBars() const {
@@ -54,6 +66,22 @@ void MainWindow::updateProgress() {
 
     if (currentLongSeconds >= longBreakDuration) {
         currentLongSeconds = 0;
+    }
+}
+
+void MainWindow::checkMouseActivity() {
+    if (const QPoint currentMousePos = QCursor::pos(); currentMousePos != lastMousePos) {
+        lastMousePos = currentMousePos;
+
+        if (!isRunning) {
+            breakTimer->start(BREAK_TIMER_DURATION);
+            isRunning = true;
+        }
+
+        inactivityTimer->start(INACTIVITY_TIMER_DURATION);
+    } else if (isRunning) {
+        breakTimer->stop();
+        isRunning = false;
     }
 }
 

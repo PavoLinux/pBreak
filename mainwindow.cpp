@@ -13,7 +13,8 @@ static QString formatTimeDisplay(const int totalSeconds) {
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
       , ui(new Ui::MainWindow)
-      , currentSeconds()
+      , currentShortSeconds(0)
+      , currentLongSeconds(0)
       , shortBreakDuration(60 * 5)
       , longBreakDuration(60 * 25)
       , isRunning(true) {
@@ -33,27 +34,26 @@ void MainWindow::initBreakBars() const {
     ui->shortBreakBar->setValue(0);
     ui->longBreakBar->setValue(0);
 
-    ui->shortBreakBar->setFormat(formatTimeDisplay(currentSeconds));
-    ui->longBreakBar->setFormat(formatTimeDisplay(currentSeconds));
+    ui->shortBreakBar->setFormat(formatTimeDisplay(currentShortSeconds));
+    ui->longBreakBar->setFormat(formatTimeDisplay(currentShortSeconds));
 }
 
 void MainWindow::updateProgress() {
-    currentSeconds++;
+    currentShortSeconds++;
+    currentLongSeconds++;
 
-    ui->shortBreakBar->setValue(currentSeconds);
-    ui->shortBreakBar->setFormat(formatTimeDisplay(currentSeconds));
+    ui->shortBreakBar->setValue(currentShortSeconds);
+    ui->shortBreakBar->setFormat(formatTimeDisplay(currentShortSeconds));
 
-    if (currentSeconds >= shortBreakDuration) {
-        ui->shortBreakBar->setValue(0);
+    if (currentShortSeconds >= shortBreakDuration) {
+        currentShortSeconds = 0;
     }
 
-    ui->longBreakBar->setValue(currentSeconds);
-    ui->longBreakBar->setFormat(formatTimeDisplay(currentSeconds));
+    ui->longBreakBar->setValue(currentLongSeconds);
+    ui->longBreakBar->setFormat(formatTimeDisplay(currentLongSeconds));
 
-    if (currentSeconds >= longBreakDuration) {
-        currentSeconds = 0;
-        ui->longBreakBar->setValue(0);
-        ui->shortBreakBar->setValue(0);
+    if (currentLongSeconds >= longBreakDuration) {
+        currentLongSeconds = 0;
     }
 }
 

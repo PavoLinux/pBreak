@@ -26,7 +26,8 @@ private:
     Ui::MainWindow *ui;
 
     QTimer* breakTimer;
-    int currentSeconds;
+    int currentShortSeconds;
+    int currentLongSeconds;
     int shortBreakDuration;
     int longBreakDuration;
     bool isRunning;

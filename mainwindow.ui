@@ -6,15 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>252</width>
-    <height>160</height>
+    <width>210</width>
+    <height>127</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>210</width>
+    <height>150</height>
+   </size>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
   </property>
   <property name="acceptDrops">
    <bool>false</bool>
@@ -23,6 +32,12 @@
    <string>pBreak</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -64,7 +79,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>252</width>
+     <width>210</width>
      <height>26</height>
     </rect>
    </property>
@@ -81,7 +96,6 @@
    <addaction name="menupBreak"/>
    <addaction name="menubout"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

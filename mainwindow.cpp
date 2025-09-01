@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
       , longBreakDuration(60 * 25)
       , isRunning(true) {
     ui->setupUi(this);
+    setFixedSize(size());
     breakTimer = new QTimer(this);
 
     initBreakBars();
